@@ -245,7 +245,7 @@ void batteryLCD(){//displaysbatterylevels on LCD, malfunctioning
 		}
 	}
 }
-void calJoy(){//recalibrates joystick by saving values while joystick is released
+void calJoy(){//recalibrates joystick on-the-fly by saving values while joystick is released
   halt();
 	clearLCDLine(1);
 	displayLCDString(1, 0, "joyCal: Waiting");
