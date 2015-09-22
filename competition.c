@@ -136,21 +136,6 @@ void turnLeftPlace(int cm, int speed = 127){//turns left in one place
 	motor[armMotorR2] = 0;
 	halt();
 }
-void turnLeftPlaceDegrees(int degrees, int speed = 127){//turns left in one place
-	clear();
-	dist = (degrees * 8.48230016469);
-	while (nMotorEncoder[leftMotorR]<dist && nMotorEncoder[rightMotorR]<dist){
-		motor[leftMotorF] = -speed;
-		motor[leftMotorR] = -speed;
-		motor[rightMotorF] = speed;
-		motor[rightMotorR] = speed;
-	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
-}
 void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while turning
 	clear();
 	dist = cm / 19.9580298637;
@@ -169,21 +154,6 @@ void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while tu
 void turnRightPlace(int cm, int speed = 63){//turns right in one place
 	clear();
 	dist = cm / 19.9580298637;
-	while (nMotorEncoder[leftMotorR]>-dist && nMotorEncoder[rightMotorR]>-dist){
-		motor[leftMotorF] = speed;
-		motor[leftMotorR] = speed;
-		motor[rightMotorF] = -speed;
-		motor[rightMotorR] = -speed;
-	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
-}
-void turnRightPlaceDegrees(int degrees, int speed = 63){//turns right in one place
-	clear();
-	dist = (degrees * 8.48230016469);
 	while (nMotorEncoder[leftMotorR]>-dist && nMotorEncoder[rightMotorR]>-dist){
 		motor[leftMotorF] = speed;
 		motor[leftMotorR] = speed;
@@ -530,18 +500,6 @@ task usercontrol(){//Usercontrol block begin
 			motor[leftMotorR] = vexRT[Ch3] - joy1Y;
 			motor[rightMotorF] = vexRT[Ch2] - joy2Y;
 			motor[rightMotorR] = vexRT[Ch2] - joy2Y;
-			if (vexRT[Btn7L] == 1){
-				while (vexRT[Btn7L] == 1){
-				}
-				turnLeftPlaceDegrees(90, 127);
-			}
-			if (vexRT[Btn7R] == 1){
-				while (vexRT[Btn7R] == 1){
-				}
-				turnRightPlaceDegrees(90, 127);
-			}
-			else{
-			}
 		}
 		motor[armMotorL1] = vexRT[Ch2Xmtr2];
 		motor[armMotorL2] = vexRT[Ch2Xmtr2];
