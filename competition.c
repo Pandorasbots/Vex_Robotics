@@ -37,12 +37,12 @@ void clear(){//resets encoders
 void halt(int set = 0){//stops all movement: 0 stops chassis, 1 stops arm, 2 stops everything. Defaults to chassis.
 	if (set==0||set==2){
 		motor[leftMotorF] = 0;
-	  motor[leftMotorR] = 0;
-	  motor[rightMotorF] = 0;
-  	motor[rightMotorR] = 0;
-  	motor[clawMotor] = 0;
-  	motor[rollerMotor] = 0;
-  }
+		motor[leftMotorR] = 0;
+		motor[rightMotorF] = 0;
+  		motor[rightMotorR] = 0;
+  		motor[clawMotor] = 0;
+  		motor[rollerMotor] = 0;
+	}
 	if (set==1||set==2){
 		motor[armMotorL1] = 0;
 		motor[armMotorL2] = 0;
