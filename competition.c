@@ -21,13 +21,14 @@
 #include "Vex_Competition_Includes.c"
 //Function-variable creation begin
 int dist;//distance, used by encoded movement functions
+int convertfactor = 19.2923076923;//formula to get this number is wheel circumfrence in centimeters divided by number of ticks. Currently set up for IMEs on a 393 motor(geared for torque) powering a mechanum wheel
 int joy1X = 0;//used for recalibration of left joystick
 int joy1Y = 0;//see above
 int joy2X = 0;//used for recalibration of right joystick
 int joy2Y = 0;//see above
 int gX = 0;//used for gyroscope threshold
 int gY = 0;//see above
-int auton = 1;//used to select automomous code with a switch-case
+int auton = 1;//used to select automomous code with a switch-case, set number to default program.
 int ExpanderBatteryLevel = 0;//used to display battery level of power expander, always displays "replace" for some reason
 bool batteryLCDBool = true;//used to select which battery level is displayed, defaults to primary
 void clear(){//resets encoders
@@ -53,7 +54,7 @@ void halt(int set = 0){//stops all movement: 0 stops chassis, 1 stops arm, 2 sto
 }
 void forward(int cm, int speed = 63){//forward for designated distance
 	clear();
-	dist = cm / 19.9580298637;
+	dist = cm / convertfactor;
 	while (nMotorEncoder[leftMotorR]>-dist && nMotorEncoder[rightMotorR]<dist){
 		motor[leftMotorF] = speed;
 		motor[leftMotorR] = speed;
@@ -68,7 +69,7 @@ void forward(int cm, int speed = 63){//forward for designated distance
 }
 void backward(int cm, int speed = 63){//see above, but moves backwards
 	clear();
-	dist = cm / 19.9580298637;
+	dist = cm / convertfactor;
 	while (nMotorEncoder[leftMotorR]<dist && nMotorEncoder[rightMotorR]>-dist){
 		motor[leftMotorF] = -speed;
 		motor[leftMotorR] = -speed;
@@ -92,7 +93,7 @@ void left(int speed = 63, int cm = 0){//moves left for a designated distance
 		motor[leftMotorR] = speed;
 	}
 	else{
-		dist = cm / 19.9580298637;
+		dist = cm / convertfactor;
 		while (nMotorEncoder[leftMotorR]<dist && nMotorEncoder[rightMotorR]<dist){
 			motor[rightMotorF] = speed;
 			motor[rightMotorR] = -speed;
@@ -111,7 +112,7 @@ void right(int speed = 63, int cm = 0){//see above, but moves right
 		motor[leftMotorR] = -speed;
 	}
 	else{
-		dist = cm / 19.9580298637;
+		dist = cm / convertfactor;
 		while (nMotorEncoder[leftMotorR]<dist && nMotorEncoder[rightMotorR]<dist){
 			motor[rightMotorF] = -speed;
 			motor[rightMotorR] = speed;
@@ -123,7 +124,7 @@ void right(int speed = 63, int cm = 0){//see above, but moves right
 }
 void turnLeftPlace(int cm, int speed = 127){//turns left in one place
 	clear();
-	dist = cm / 19.9580298637;
+	dist = cm / convertfactor;
 	while (nMotorEncoder[leftMotorR]<dist && nMotorEncoder[rightMotorR]<dist){
 		motor[leftMotorF] = -speed;
 		motor[leftMotorR] = -speed;
@@ -138,7 +139,7 @@ void turnLeftPlace(int cm, int speed = 127){//turns left in one place
 }
 void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while turning
 	clear();
-	dist = cm / 19.9580298637;
+	dist = cm / convertfactor;
 	while (nMotorEncoder[leftMotorR]<(dist/5) && nMotorEncoder[rightMotorR]<dist){
 		motor[leftMotorF] = (speed/5);
 		motor[leftMotorR] = (speed/5);
@@ -153,7 +154,7 @@ void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while tu
 }
 void turnRightPlace(int cm, int speed = 63){//turns right in one place
 	clear();
-	dist = cm / 19.9580298637;
+	dist = cm / convertfactor;
 	while (nMotorEncoder[leftMotorR]>-dist && nMotorEncoder[rightMotorR]>-dist){
 		motor[leftMotorF] = speed;
 		motor[leftMotorR] = speed;
@@ -168,7 +169,7 @@ void turnRightPlace(int cm, int speed = 63){//turns right in one place
 }
 void turnRightArc(int cm, int speed = 63){//see above, but movesforward while turning
 	clear();
-	dist = cm / 19.9580298637;
+	dist = cm / convertfactor;
 	while (nMotorEncoder[leftMotorR]>-dist && nMotorEncoder[rightMotorR]>-(dist/2)){
 		motor[leftMotorF] = speed;
 		motor[leftMotorR] = speed;
