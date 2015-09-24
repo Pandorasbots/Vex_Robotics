@@ -22,14 +22,14 @@
 
 //Function-variable creation begin
 int dist;//distance, used by encoded movement functions
-int convertfactor = 19.2923076923;//formula to get this number is wheel circumfrence in centimeters divided by number of ticks. Currently set up for IMEs on a 393 motor(geared for torque) powering a mechanum wheel
+int convertfactor = 19.2923076923;//formula to get this number is wheel circumference in centimeters divided by number of ticks. Currently set up for IMEs on a 393 motor(geared for torque) powering a mecanum wheel
 int joy1X = 0;//used for recalibration of left joystick
 int joy1Y = 0;//see above
 int joy2X = 0;//used for recalibration of right joystick
 int joy2Y = 0;//see above
 int gX = 0;//used for gyroscope threshold
 int gY = 0;//see above
-int auton = 1;//used to select automomous code with a switch-case, set number to default program.
+int auton = 1;//used to select autonomous code with a switch-case, set number to default autonomous program.
 int ExpanderBatteryLevel = 0;//used to display battery level of power expander, always displays "replace" for some reason
 bool batteryLCDBool = true;//used to select which battery level is displayed, defaults to primary
 void clear(){//resets encoders
@@ -188,23 +188,18 @@ void closeClaw(int time,int speed = 63){//closes claw
 	wait1Msec(time);
 }
 void batteryLCD(){//displays battery levels on LCD
-	if (time1[T1]%100 == 0)
-	{
-		switch(batteryLCDBool)
-		{
+	if (time1[T1]%100 == 0){
+		switch(batteryLCDBool){
 		case true:
 			clearLCDLine(0);
 			displayLCDString(0, 0, "Primary: ");
-			if (nAvgBatteryLevel < 5500)
-			{
+			if (nAvgBatteryLevel < 5500){
 				displayNextLCDString("Replace");
 			}
-			else if (nAvgBatteryLevel < 6500)
-			{
+			else if (nAvgBatteryLevel < 6500){
 				displayNextLCDString("Low");
 			}
-			else
-			{
+			else{
 				displayNextLCDString("Good");
 			}
 			break;
@@ -212,16 +207,13 @@ void batteryLCD(){//displays battery levels on LCD
 			ExpanderBatteryLevel = SensorValue[ExpanderBattery] / 7;
 			clearLCDLine(0);
 			displayLCDString(0, 0, "Secondary: ");
-			if (ExpanderBatteryLevel < 550)
-			{
+			if (ExpanderBatteryLevel < 550){
 				displayNextLCDString("Replace");
 			}
-			else if (ExpanderBatteryLevel < 650)
-			{
+			else if (ExpanderBatteryLevel < 650){
 				displayNextLCDString("Low");
 			}
-			else
-			{
+			else{
 				displayNextLCDString("Good");
 			}
 			break;
@@ -229,17 +221,15 @@ void batteryLCD(){//displays battery levels on LCD
 	}
 }
 void calJoy(){//recalibrates joystick on-the-fly by saving values while joystick is released
-  halt();
+	halt();
 	clearLCDLine(1);
-	displayLCDString(1, 0, "joyCal: Waiting");
+	displayLCDString(1, 0, "calJoy: Waiting");
 	delay(2000);
-	if (abs(vexRT[Ch4]) < 30 && abs(vexRT[Ch3]) < 30)
-	{
+	if (abs(vexRT[Ch4]) < 30 && abs(vexRT[Ch3]) < 30){
 		joy1X = vexRT[Ch4];
 		joy1Y = vexRT[Ch3];
 	}
-	if (abs(vexRT[Ch1]) < 30 && abs(vexRT[Ch2]) < 30)
-	{
+	if (abs(vexRT[Ch1]) < 30 && abs(vexRT[Ch2]) < 30){
 		joy2X = vexRT[Ch1];
 		joy2Y = vexRT[Ch2];
 	}
@@ -247,148 +237,110 @@ void calJoy(){//recalibrates joystick on-the-fly by saving values while joystick
 }//Function-variable creation end
 void pre_auton(){//Pre-Autonomous block begin
 	clear();
-	while (bIfiRobotDisabled)//outputs true when robot is disabled, ends subroutine when autonomous starts
-	{
+	while (bIfiRobotDisabled){//outputs true when robot is disabled, ends subroutine when autonomous starts
 		displayLCDString(1, 0, "<<");
 		displayLCDString(1, 14, ">>");
-		switch(auton)
-		{
+		switch(auton){
 		case 1://red 1
 			displayLCDCenteredString(0, "Red 1");
-			if (nLCDButtons == 1)
-			{
-				while (nLCDButtons == 1)
-				{
+			if (nLCDButtons == 1){
+				while (nLCDButtons == 1){
 				}
 				auton = 6;
 			}
-			else
-			{
+			else{
 			}
-			if (nLCDButtons == 4)
-			{
-				while (nLCDButtons == 4)
-				{
+			if (nLCDButtons == 4){
+				while (nLCDButtons == 4){
 				}
 				auton = 2;
 			}
-			else
-			{
+			else{
 			}
 			break;
 		case 2://red 2
 			displayLCDCenteredString(0, "Red 2");
-			if (nLCDButtons == 1)
-			{
-				while (nLCDButtons == 1)
-				{
+			if (nLCDButtons == 1){
+				while (nLCDButtons == 1){
 				}
 				auton = 1;
 			}
-			else
-			{
+			else{
 			}
-			if (nLCDButtons == 4)
-			{
-				while (nLCDButtons == 4)
-				{
+			if (nLCDButtons == 4){
+				while (nLCDButtons == 4){
 				}
 				auton = 3;
 			}
-			else
-			{
+			else{
 			}
 			break;
 		case 3://blue 1
 			displayLCDCenteredString(0, "Blue 1");
-			if (nLCDButtons == 1)
-			{
-				while (nLCDButtons == 1)
-				{
+			if (nLCDButtons == 1){
+				while (nLCDButtons == 1){
 				}
 				auton = 2;
 			}
-			else
-			{
+			else{
 			}
-			if (nLCDButtons == 4)
-			{
-				while (nLCDButtons == 4)
-				{
+			if (nLCDButtons == 4){
+				while (nLCDButtons == 4){
 				}
 				auton = 4;
 			}
-			else
-			{
+			else{
 			}
 			break;
 		case 4://blue 2
 			displayLCDCenteredString(0, "Blue 2");
-			if (nLCDButtons == 1)
-			{
-				while (nLCDButtons == 1)
-				{
+			if (nLCDButtons == 1){
+				while (nLCDButtons == 1){
 				}
 				auton = 3;
 			}
-			else
-			{
+			else{
 			}
-			if (nLCDButtons == 4)
-			{
-				while (nLCDButtons == 4)
-				{
+			if (nLCDButtons == 4){
+				while (nLCDButtons == 4){
 				}
 				auton = 5;
 			}
-			else
-			{
+			else{
 			}
 			break;
 		case 5://Programming skills
 			displayLCDCenteredString(0, "Pr. Skills");
-			if (nLCDButtons == 1)
-			{
-				while (nLCDButtons == 1)
-				{
+			if (nLCDButtons == 1){
+				while (nLCDButtons == 1){
 				}
 				auton = 4;
 			}
-			else
-			{
+			else{
 			}
-			if (nLCDButtons == 4)
-			{
-				while (nLCDButtons == 4)
-				{
+			if (nLCDButtons == 4){
+				while (nLCDButtons == 4){
 				}
 				auton = 6;
 			}
-			else
-			{
+			else{
 			}
 			break;
 		case 6://Emergency fallback
 			displayLCDCenteredString(0, "Emergency");
-			if (nLCDButtons == 1)
-			{
-				while (nLCDButtons == 1)
-				{
+			if (nLCDButtons == 1){
+				while (nLCDButtons == 1){
 				}
 				auton = 5;
 			}
-			else
-			{
+			else{
 			}
-			if (nLCDButtons == 4)
-			{
-				while (nLCDButtons == 4)
-				{
+			if (nLCDButtons == 4){
+				while (nLCDButtons == 4){
 				}
 				auton = 1;
 			}
-			else
-			{
+			else{
 			}
 			break;
 		}
@@ -418,7 +370,7 @@ task autonomous(){//Autonomous block begin
 		break;
 	}
 	while(bIfiAutonomousMode){//"catch" program while autonomous mode is active to stop auton code from looping
-		halt();
+		halt(2);
 	}
 }//Autonomous block end
 task usercontrol(){//Usercontrol block begin
