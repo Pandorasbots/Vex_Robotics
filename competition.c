@@ -62,11 +62,7 @@ void forward(int cm, int speed = 63){//forward for designated distance
 		motor[rightMotorF] = speed;
 		motor[rightMotorR] = speed;
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void backward(int cm, int speed = 63){//see above, but moves backwards
 	clear();
@@ -132,11 +128,7 @@ void turnLeftPlace(int cm, int speed = 127){//turns left in one place
 		motor[rightMotorF] = speed;
 		motor[rightMotorR] = speed;
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while turning
 	clear();
@@ -147,11 +139,7 @@ void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while tu
 		motor[rightMotorF] = speed;
 		motor[rightMotorR] = speed;
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void turnRightPlace(int cm, int speed = 63){//turns right in one place
 	clear();
@@ -162,11 +150,7 @@ void turnRightPlace(int cm, int speed = 63){//turns right in one place
 		motor[rightMotorF] = -speed;
 		motor[rightMotorR] = -speed;
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void turnRightArc(int cm, int speed = 63){//see above, but movesforward while turning
 	clear();
@@ -177,11 +161,7 @@ void turnRightArc(int cm, int speed = 63){//see above, but movesforward while tu
 		motor[rightMotorF] = (speed/2);
 		motor[rightMotorR] = (speed/2);
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void raiseArm(int time, int speed = 63){//raises arm
 	motor[armMotorL1] = -speed;
@@ -189,6 +169,7 @@ void raiseArm(int time, int speed = 63){//raises arm
 	motor[armMotorR1] = -speed;
 	motor[armMotorR2] = -speed;
 	wait1Msec(time);
+	halt(1);
 }
 void lowerArm(int time, int speed = 63){//lowers arm
 	motor[armMotorL1] = speed;
@@ -196,6 +177,7 @@ void lowerArm(int time, int speed = 63){//lowers arm
 	motor[armMotorR1] = speed;
 	motor[armMotorR2] = speed;
 	wait1Msec(time);
+	halt(1);
 }
 void openClaw(int time, int speed = 63){//opens claw
 	motor[clawMotor] = speed;
@@ -205,7 +187,7 @@ void closeClaw(int time,int speed = 63){//closes claw
 	motor[clawMotor] = -speed;
 	wait1Msec(time);
 }
-void batteryLCD(){//displaysbatterylevels on LCD, malfunctioning
+void batteryLCD(){//displays battery levels on LCD
 	if (time1[T1]%100 == 0)
 	{
 		switch(batteryLCDBool)
@@ -271,7 +253,7 @@ void pre_auton(){//Pre-Autonomous block begin
 		displayLCDString(1, 14, ">>");
 		switch(auton)
 		{
-		case 1://red autoloader
+		case 1://red 1
 			displayLCDCenteredString(0, "Red 1");
 			if (nLCDButtons == 1)
 			{
@@ -294,7 +276,7 @@ void pre_auton(){//Pre-Autonomous block begin
 			{
 			}
 			break;
-		case 2://red posts
+		case 2://red 2
 			displayLCDCenteredString(0, "Red 2");
 			if (nLCDButtons == 1)
 			{
@@ -317,7 +299,7 @@ void pre_auton(){//Pre-Autonomous block begin
 			{
 			}
 			break;
-		case 3://blue autoloader
+		case 3://blue 1
 			displayLCDCenteredString(0, "Blue 1");
 			if (nLCDButtons == 1)
 			{
@@ -340,7 +322,7 @@ void pre_auton(){//Pre-Autonomous block begin
 			{
 			}
 			break;
-		case 4://blue posts
+		case 4://blue 2
 			displayLCDCenteredString(0, "Blue 2");
 			if (nLCDButtons == 1)
 			{
@@ -417,22 +399,22 @@ task autonomous(){//Autonomous block begin
 	switch(auton)
 	{
 	case 1://red 1
-		
+		//code here
 		break;
 	case 2://red 2
-		
+		//code here
 		break;
 	case 3://blue 1
-		
+		//code here
 		break;
 	case 4://blue 2
-		
+		//code here
 		break;
 	case 5://programming skills
-		
+		//code here
 		break;
 	case 6://emergency fallback
-		
+		//code here
 		break;
 	}
 	while(bIfiAutonomousMode){//"catch" program while autonomous mode is active to stop auton code from looping
