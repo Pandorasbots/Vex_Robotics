@@ -62,11 +62,7 @@ void forward(int cm, int speed = 63){//forward for designated distance
 		motor[rightMotorF] = speed;
 		motor[rightMotorR] = speed;
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void backward(int cm, int speed = 63){//see above, but moves backwards
 	clear();
@@ -132,11 +128,7 @@ void turnLeftPlace(int cm, int speed = 127){//turns left in one place
 		motor[rightMotorF] = speed;
 		motor[rightMotorR] = speed;
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while turning
 	clear();
@@ -147,11 +139,7 @@ void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while tu
 		motor[rightMotorF] = speed;
 		motor[rightMotorR] = speed;
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void turnRightPlace(int cm, int speed = 63){//turns right in one place
 	clear();
@@ -162,11 +150,7 @@ void turnRightPlace(int cm, int speed = 63){//turns right in one place
 		motor[rightMotorF] = -speed;
 		motor[rightMotorR] = -speed;
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void turnRightArc(int cm, int speed = 63){//see above, but movesforward while turning
 	clear();
@@ -177,11 +161,7 @@ void turnRightArc(int cm, int speed = 63){//see above, but movesforward while tu
 		motor[rightMotorF] = (speed/2);
 		motor[rightMotorR] = (speed/2);
 	}
-	motor[armMotorL1] = 0;
-	motor[armMotorL2] = 0;
-	motor[armMotorR1] = 0;
-	motor[armMotorR2] = 0;
-	halt();
+	halt(2);
 }
 void raiseArm(int time, int speed = 63){//raises arm
 	motor[armMotorL1] = -speed;
@@ -189,6 +169,7 @@ void raiseArm(int time, int speed = 63){//raises arm
 	motor[armMotorR1] = -speed;
 	motor[armMotorR2] = -speed;
 	wait1Msec(time);
+	halt(1);
 }
 void lowerArm(int time, int speed = 63){//lowers arm
 	motor[armMotorL1] = speed;
@@ -196,6 +177,7 @@ void lowerArm(int time, int speed = 63){//lowers arm
 	motor[armMotorR1] = speed;
 	motor[armMotorR2] = speed;
 	wait1Msec(time);
+	halt(1);
 }
 void openClaw(int time, int speed = 63){//opens claw
 	motor[clawMotor] = speed;
