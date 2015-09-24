@@ -16,9 +16,8 @@
 
 #pragma platform(VEX)
 #pragma competitionControl(Competition)
-#pragma autonomousDuration(20)
-#pragma userControlDuration(120)
 #include "Vex_Competition_Includes.c"
+
 //Function-variable creation begin
 int dist;//distance, used by encoded movement functions
 int convertfactor = 19.2923076923;//formula to get this number is wheel circumfrence in centimeters divided by number of ticks. Currently set up for IMEs on a 393 motor(geared for torque) powering a mechanum wheel
@@ -459,7 +458,6 @@ task usercontrol(){//Usercontrol block begin
 			right(127);
 		}
 		else if (vexRT[Btn8R] == 1){
-			halt();
 			calJoy();
 		}
 		else if (vexRT[Btn8U] == 1){
